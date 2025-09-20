@@ -43,7 +43,7 @@ def main():
         formatted_list = None
         script_dir = os.path.dirname(os.path.abspath(__file__))
         students_paths = {}
-        class_letters = get_available_turma_letters(classroom_service, semester) or ["A", "B"]
+        class_letters = get_available_turma_letters(classroom_service, semester) or ["A", "B", "C"]
 
         for class_letter in class_letters:
             turma_type = f"TURMA {class_letter}"
