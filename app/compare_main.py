@@ -291,8 +291,9 @@ def salvar_json(lista: str, alunos: list[Aluno]):
 # Main
 # -------------------------------
 def main():
-    _, lista_nome, dificuldade = sys.argv
-    dificuldade = int(dificuldade)
+    lista_nome = sys.argv[1] if len(sys.argv) > 1 else "padrao.txt"
+    dificuldade = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 2
+    
     start_time = time.time()
     alunos = carregar_questoes(lista_nome)
     print(f"Tempo de carregamento: {(time.time() - start_time):.2f}s")

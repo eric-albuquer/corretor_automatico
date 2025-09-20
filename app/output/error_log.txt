@@ -1,0 +1,19 @@
+Erro se existe uma pasta dentro da pasta: [WinError 32] O arquivo já está sendo usado por outro processo
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro inesperado ao selecionar dados do Classroom: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro inesperado ao selecionar dados do Classroom: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro no fluxo principal: [Errno 22] Invalid argument
+Erro se existe uma pasta dentro da pasta: [WinError 32] O arquivo já está sendo usado por outro processo
+Erro se existe uma pasta dentro da pasta: [WinError 32] O arquivo já está sendo usado por outro processo
+Erro se existe uma pasta dentro da pasta: [WinError 32] O arquivo já está sendo usado por outro processo
+Erro ao atualizar JSON com notas do Beecrowd: [Errno 22] Invalid argument
+Erro ao comparar e-mails entre Beecrowd e JSON: [Errno 22] Invalid argument
+Erro no fluxo principal do Beecrowd: [Errno 22] Invalid argument
