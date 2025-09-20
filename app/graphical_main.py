@@ -12,24 +12,31 @@ scripts_ordem = [
     "spreadsheet_main.py"
 ]
 
-def rodar_sequencia(input_text):
-    """Executa os scripts selecionados na ordem, enviando input_text como argumento e mostrando tempo de execução"""
+def rodar_sequencia(input_text, dificuldade):
+    """Executa os scripts selecionados na ordem, enviando input_text e (se for compare) também dificuldade"""
     scripts = [
         (scripts_ordem[0], check1_var),
         (scripts_ordem[1], check2_var),
-        (scripts_ordem[2], check3_var),
+        (scripts_ordem[2], check3_var),  # Compare
         (scripts_ordem[3], check4_var)
     ]
 
     def task():
         for script, var in scripts:
             if var.get():
-                terminal.insert(tk.END, f"\nExecutando {script} com argumento '{input_text}'...\n")
+                # Monta os argumentos
+                if script == "compare_main.py":
+                    args = [sys.executable, "-u", script, input_text, str(dificuldade)]
+                    terminal.insert(tk.END, f"\nExecutando {script} com argumentos '{input_text}' e dificuldade {dificuldade}...\n")
+                else:
+                    args = [sys.executable, "-u", script, input_text]
+                    terminal.insert(tk.END, f"\nExecutando {script} com argumento '{input_text}'...\n")
+
                 terminal.see(tk.END)
 
                 start_time = time.time()
                 process = subprocess.Popen(
-                    [sys.executable, "-u", script, input_text],
+                    args,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
                     text=True,
@@ -56,11 +63,18 @@ def rodar_sequencia(input_text):
 
 def enviar_input():
     texto = entrada.get()
+    dificuldade = entrada_dificuldade.get()
+
     if not texto:
         terminal.insert(tk.END, "Por favor, digite algum texto para enviar como argumento.\n")
         return
-    terminal.insert(tk.END, f"> Enviando '{texto}' para os scripts selecionados\n")
-    rodar_sequencia(texto)
+
+    if not dificuldade.isdigit() or not (1 <= int(dificuldade) <= 10):
+        terminal.insert(tk.END, "Por favor, insira uma dificuldade válida (1 a 10).\n")
+        return
+
+    terminal.insert(tk.END, f"> Enviando '{texto}' (dificuldade {dificuldade} apenas para Compare) para os scripts selecionados\n")
+    rodar_sequencia(texto, int(dificuldade))
     entrada.delete(0, tk.END)
 
 def limpar_terminal():
@@ -77,10 +91,10 @@ root.bind("<Escape>", lambda e: root.attributes("-fullscreen", False))
 frame_check = tk.LabelFrame(root, text="Scripts", font=("Arial", 16, "bold"), padx=10, pady=10, bg="#f0f0f0")
 frame_check.pack(side=tk.TOP, pady=10, padx=10, fill=tk.X)
 
-check1_var = tk.BooleanVar()
-check2_var = tk.BooleanVar()
-check3_var = tk.BooleanVar()
-check4_var = tk.BooleanVar()
+check1_var = tk.BooleanVar(value=True)
+check2_var = tk.BooleanVar(value=True)
+check3_var = tk.BooleanVar(value=True)
+check4_var = tk.BooleanVar(value=True)
 
 check1 = tk.Checkbutton(frame_check, text="Download", variable=check1_var, font=("Arial", 16, "bold"),
                         height=3, width=20, bg="#f0f0f0")
@@ -98,8 +112,7 @@ check4 = tk.Checkbutton(frame_check, text="Spreadsheet", variable=check4_var, fo
                         height=3, width=20, bg="#f0f0f0")
 check4.pack(side=tk.LEFT, padx=5)
 
-# --- Frame de input e botão de execução --
-
+# --- Frame de input e botão de execução ---
 frame_input_config = tk.LabelFrame(root, text="Configuração", font=("Arial", 16, "bold"),
                                 padx=10, pady=10, bg="#f0f0f0")
 frame_input_config.pack(side=tk.TOP, pady=10, padx=10, fill=tk.X)
@@ -110,6 +123,15 @@ lbl_input.pack(side=tk.LEFT, padx=5)
 entrada = tk.Entry(frame_input_config, font=("Arial", 14), width=25)
 entrada.pack(side=tk.LEFT, padx=5)
 
+lbl_dificuldade = tk.Label(frame_input_config, text="Dificuldade (1-10):", font=("Arial", 14), bg="#f0f0f0")
+lbl_dificuldade.pack(side=tk.LEFT, padx=5)
+
+# Spinbox em vez de Entry, com valor padrão 5
+entrada_dificuldade = tk.Spinbox(frame_input_config, from_=1, to=10, font=("Arial", 14), width=5)
+entrada_dificuldade.delete(0, tk.END)
+entrada_dificuldade.insert(0, "2")  # valor padrão
+entrada_dificuldade.pack(side=tk.LEFT, padx=5)
+
 btn_enviar = tk.Button(frame_input_config, text="Executar Selecionados", command=enviar_input,
                        height=2, width=25, font=("Arial", 14, "bold"),
                        bg="#4CAF50", fg="white", activebackground="#45a049")
@@ -119,7 +141,6 @@ btn_limpar = tk.Button(frame_input_config, text="Limpar Terminal", command=limpa
                        height=2, width=15, font=("Arial", 14, "bold"),
                        bg="#f44336", fg="white", activebackground="#e53935")
 btn_limpar.pack(side=tk.LEFT, padx=5)
-
 
 # --- Área de texto para saída ---
 terminal = tk.Text(root, wrap="word", bg="#111111", fg="#00FF00", font=("Consolas", 12),
