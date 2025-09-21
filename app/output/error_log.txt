@@ -17,3 +17,6 @@ Erro se existe uma pasta dentro da pasta: [WinError 32] O arquivo já está send
 Erro ao atualizar JSON com notas do Beecrowd: [Errno 22] Invalid argument
 Erro ao comparar e-mails entre Beecrowd e JSON: [Errno 22] Invalid argument
 Erro no fluxo principal do Beecrowd: [Errno 22] Invalid argument
+Erro ao renomear o diretório se necessário: [WinError 5] Acesso negado: 'C:\\Users\\erica\\OneDrive\\Desktop\\Codigos\\Python\\corretor_automatico_eric\\corretor_automatico\\Downloads\\LISTA 02\\zips_turmaB\\submissions_turmaB\\vpmd\\vpmd2' -> 'C:\\Users\\erica\\OneDrive\\Desktop\\Codigos\\Python\\corretor_automatico_eric\\corretor_automatico\\Downloads\\LISTA 02\\zips_turmaB\\submissions_turmaB\\vpmd\\vpmd'
+Erro no fluxo principal: [WinError 5] Acesso negado: 'C:\\Users\\erica\\OneDrive\\Desktop\\Codigos\\Python\\corretor_automatico_eric\\corretor_automatico\\Downloads\\LISTA 02\\zips_turmaA\\submissions_turmaA'
+Erro no fluxo principal: [WinError 5] Acesso negado: 'C:\\Users\\erica\\OneDrive\\Desktop\\Codigos\\Python\\corretor_automatico_eric\\corretor_automatico\\Downloads\\LISTA 01\\zips_turmaA\\submissions_turmaA'
